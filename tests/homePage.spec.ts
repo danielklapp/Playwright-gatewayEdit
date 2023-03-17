@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test("Home page for gatewayEdit", async ({ page }) => {
-  await page.goto(`${process.env.BASE_URL}`);
+  await page.goto(`${process.env.BASE_URL}?server=QA`);
   await page
     .locator('[data-test="username-input"]')
     .getByRole("textbox")

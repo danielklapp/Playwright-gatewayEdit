@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test.describe.parallel("All my test together", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(`${process.env.BASE_URL}`);
+    await page.goto(`${process.env.BASE_URL}?server=QA`);
     await page
       .locator('[data-test="username-input"]')
       .getByRole("textbox")
