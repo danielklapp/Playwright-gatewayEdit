@@ -27,6 +27,95 @@ test("Home page for gatewayEdit", async ({ page }) => {
   await page.getByRole("option", { name: "en - English - English" }).click();
   await page.getByRole("button", { name: "Save and Continue" }).click();
 });
+
+test("Minimize and restore cards", async ({ page }) => {
+  await page.goto(`${process.env.BASE_URL}?server=QA`);
+  await page
+    .locator('[data-test="username-input"]')
+    .getByRole("textbox")
+    .click();
+  await page
+    .locator('[data-test="username-input"]')
+    .getByRole("textbox")
+    .fill(`${process.env.USERNAME}`);
+  await page
+    .locator('[data-test="password-input"]')
+    .getByRole("textbox")
+    .click();
+  await page
+    .locator('[data-test="password-input"]')
+    .getByRole("textbox")
+    .fill(`${process.env.PASSWORD}`);
+  await page.getByLabel("Keep me logged in").check();
+  await page.locator('[data-test="submit-button"]').click();
+  await page.locator("#organization-select-outlined").click();
+  await page.getByRole("option", { name: "unfoldingWord" }).click();
+  await page.getByRole("button", { name: "​", exact: true }).click();
+  await page.getByRole("option", { name: "en - English - English" }).click();
+  await page.getByRole("button", { name: "Save and Continue" }).click();
+  await page
+    .locator("#scripture_card_0")
+    .getByRole("button", { name: "Minimize" })
+    .click();
+  await page
+    .locator("#scripture_card_1")
+    .getByRole("button", { name: "Minimize" })
+    .click();
+  await page
+    .locator("#scripture_card_2")
+    .getByRole("button", { name: "Minimize" })
+    .click();
+  await page
+    .locator("#resource_card_tn")
+    .getByRole("button", { name: "Minimize" })
+    .click();
+  await page
+    .locator("#resource_card_ta")
+    .getByRole("button", { name: "Minimize" })
+    .click();
+  await page
+    .locator("#resource_card_twl")
+    .getByRole("button", { name: "Minimize" })
+    .click();
+  await page
+    .locator("#resource_card_twa")
+    .getByRole("button", { name: "Minimize" })
+    .click();
+  await page.getByRole("button", { name: "Minimize", exact: true }).click();
+
+  await page.getByRole("button", { name: "minimized cards" }).click();
+  await page
+    .getByRole("button", { name: "Restore Literal Translation card." })
+    .click();
+  await page.getByRole("button", { name: "minimized cards" }).click();
+  await page
+    .getByRole("button", { name: "Restore Original Source card." })
+    .click();
+  await page.getByRole("button", { name: "minimized cards" }).click();
+  await page
+    .getByRole("button", { name: "Restore Simplified Translation card." })
+    .click();
+  await page.getByRole("button", { name: "minimized cards" }).click();
+  await page
+    .getByRole("button", { name: "Restore translationNotes card." })
+    .click();
+  await page.getByRole("button", { name: "minimized cards" }).click();
+  await page
+    .getByRole("button", { name: "Restore translationAcademy card." })
+    .click();
+  await page.getByRole("button", { name: "minimized cards" }).click();
+  await page
+    .getByRole("button", { name: "Restore translationWords List card." })
+    .click();
+  await page.getByRole("button", { name: "minimized cards" }).click();
+  await page
+    .getByRole("button", { name: "Restore translationWords Article card." })
+    .click();
+  await page.getByRole("button", { name: "minimized cards" }).click();
+  await page
+    .getByRole("button", { name: "Restore translationQuestions card." })
+    .click();
+});
 /*
 test("Slider test one", async ({ page }) => {
   await page.goto(`${process.env.BASE_URL}?server=QA`);
