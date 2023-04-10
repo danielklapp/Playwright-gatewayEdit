@@ -16,4 +16,27 @@ export class HomePage {
   async clickOnSignIn() {
     await this.signInButton.click();
   }
+
+  card(cardLocator: string) {
+    const card = this.page.locator(cardLocator);
+    return card;
+  }
+
+  async minimize(cardLocator: string) {
+    const card = this.card(cardLocator);
+    const button = card.getByRole("button", {
+      name: "Minimize",
+    });
+
+    await button.click();
+  }
+
+  async restore(cardLocator: string) {
+    const card = this.card(cardLocator);
+    const button = card.getByRole("button", {
+      name: "Restore",
+    });
+
+    await button.click();
+  }
 }
