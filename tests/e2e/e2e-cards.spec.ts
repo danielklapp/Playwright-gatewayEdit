@@ -26,5 +26,6 @@ test.describe.parallel("Pane Card", () => {
     await homePage.minimize("#resource_card_twa");
     await homePage.minimize("#resource_card_tn");
     await homePage.minimize("#resource_card_ta");
+    await homePage.minimize("#resource_card_tq");
   });
 });
