@@ -10,7 +10,11 @@ export class HomePage {
   }
 
   async visit() {
-    await this.page.goto(`${process.env.BASE_URL}?server=QA`);
+    //   await this.page.goto(`${process.env.BASE_URL}`);
+
+    await this.page.goto(
+      `https://release-v2-0-0--gateway-edit.netlify.app/?server=qa`
+    );
   }
 
   async clickOnSignIn() {
@@ -32,11 +36,10 @@ export class HomePage {
   }
 
   async restore(cardLocator: string) {
-    const card = this.card(cardLocator);
-    const button = card.getByRole("button", {
-      name: "Restore",
-    });
+    const recentCards = this.page.locator("#show_minimized_cards");
+    const button = this.page.locator(cardLocator);
 
+    await recentCards.click();
     await button.click();
   }
 }
