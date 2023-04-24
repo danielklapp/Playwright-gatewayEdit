@@ -16,7 +16,7 @@ test.describe.parallel("Pane Card", () => {
     await homePage.visit();
   });
 
-  test.only("Minimize and restore cards", async ({ page }) => {
+  test.only("Minimize and restore cards by button", async ({ page }) => {
     await loginPage.login();
     await accountSettingsPage.translationSettings();
     await homePage.minimize("#scripture_card_0");
@@ -27,5 +27,17 @@ test.describe.parallel("Pane Card", () => {
     await homePage.minimize("#resource_card_tn");
     await homePage.minimize("#resource_card_ta");
     await homePage.minimize("#resource_card_tq");
+    await homePage.restore(
+      "#restore_button_scripture_card_Literal_Translation"
+    );
+    await homePage.restore("#restore_button_scripture_card_Original_Source");
+    await homePage.restore(
+      "#restore_button_scripture_card_Simplified_Translation"
+    );
+    await homePage.restore("#restore_button_resource_card_tn");
+    await homePage.restore("#restore_button_resource_card_ta");
+    await homePage.restore("#restore_button_resource_card_twl");
+    await homePage.restore("#restore_button_resource_card_twa");
+    await homePage.restore("#restore_button_resource_card_tq");
   });
 });
