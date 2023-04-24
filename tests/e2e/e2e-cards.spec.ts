@@ -3,7 +3,7 @@ import { LoginPage } from "../../page-objects/LoginPage";
 import { HomePage } from "../../page-objects/HomePage";
 import { AccountSettingsPage } from "../../page-objects/AccountSettingsPage";
 
-test.describe.parallel("Pane Card", () => {
+test.describe.parallel("Scripture Pane Card", () => {
   let loginPage: LoginPage;
   let homePage: HomePage;
   let accountSettingsPage: AccountSettingsPage;
@@ -16,7 +16,7 @@ test.describe.parallel("Pane Card", () => {
     await homePage.visit();
   });
 
-  test.only("Minimize and restore cards by button", async ({ page }) => {
+  test("Minimize and restore cards by button", async ({ page }) => {
     await loginPage.login();
     await accountSettingsPage.translationSettings();
     await homePage.minimize("#scripture_card_0");
@@ -34,10 +34,35 @@ test.describe.parallel("Pane Card", () => {
     await homePage.restore(
       "#restore_button_scripture_card_Simplified_Translation"
     );
-    await homePage.restore("#restore_button_resource_card_tn");
-    await homePage.restore("#restore_button_resource_card_ta");
     await homePage.restore("#restore_button_resource_card_twl");
     await homePage.restore("#restore_button_resource_card_twa");
+    await homePage.restore("#restore_button_resource_card_tn");
+    await homePage.restore("#restore_button_resource_card_ta");
     await homePage.restore("#restore_button_resource_card_tq");
+  });
+
+  test("Minimize and restore cards by title", async ({ page }) => {
+    await loginPage.login();
+    await accountSettingsPage.translationSettings();
+    await homePage.minimize("#scripture_card_0");
+    await homePage.minimize("#scripture_card_1");
+    await homePage.minimize("#scripture_card_2");
+    await homePage.minimize("#resource_card_twl");
+    await homePage.minimize("#resource_card_twa");
+    await homePage.minimize("#resource_card_tn");
+    await homePage.minimize("#resource_card_ta");
+    await homePage.minimize("#resource_card_tq");
+    await homePage.restore(
+      "#restore_title_scripture_card_Literal_Translation div"
+    );
+    await homePage.restore("#restore_title_scripture_card_Original_Source div");
+    await homePage.restore(
+      "#restore_title_scripture_card_Simplified_Translation div"
+    );
+    await homePage.restore("#restore_title_resource_card_twl div");
+    await homePage.restore("#restore_title_resource_card_twa div");
+    await homePage.restore("#restore_title_resource_card_tn div");
+    await homePage.restore("#restore_title_resource_card_ta div");
+    await homePage.restore("#restore_title_resource_card_tq div");
   });
 });
