@@ -172,7 +172,7 @@ test("Minimize button and Restore buttons for cards", async ({ page }) => {
     .click();
 });
 
-test.only("Minimize button and Restore Title buttons for cards", async ({
+test("Minimize button and Restore Title buttons for cards", async ({
   page,
 }) => {
   await page.goto(
