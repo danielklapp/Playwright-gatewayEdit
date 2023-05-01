@@ -298,16 +298,12 @@ test("Checking previous and next buttons for translationNotes", async ({
   await page.getByRole("button", { name: "​", exact: true }).click();
   await page.getByRole("option", { name: "en - English - English" }).click();
   await page.getByRole("button", { name: "Save and Continue" }).click();
-  await page.locator("#resource_card_tn_prev").click();
-  await page.locator("#resource_card_tn_prev").click();
-  await page.locator("#resource_card_tn_prev").click();
-  await page.locator("#resource_card_tn_prev").click();
-  await page.locator("#resource_card_tn_prev").click();
-  await page.locator("#resource_card_tn_next").click();
-  await page.locator("#resource_card_tn_next").click();
-  await page.locator("#resource_card_tn_next").click();
-  await page.locator("#resource_card_tn_next").click();
-  await page.locator("#resource_card_tn_next").click();
+  for (let i = 0; i < 5; i++) {
+    await page.locator("#resource_card_tn_prev").click();
+  }
+  for (let i = 0; i < 5; i++) {
+    await page.locator("#resource_card_tn_next").click();
+  }
 });
 
 test("Checking previous and next buttons for translationWords Articles", async ({
@@ -339,15 +335,12 @@ test("Checking previous and next buttons for translationWords Articles", async (
   await page.getByRole("button", { name: "​", exact: true }).click();
   await page.getByRole("option", { name: "en - English - English" }).click();
   await page.getByRole("button", { name: "Save and Continue" }).click();
-  // await page.pause();
-  await page.locator("#resource_card_twa_prev").click();
-  await page.locator("#resource_card_twa_prev").click();
-  await page.locator("#resource_card_twa_prev").click();
-  await page.locator("#resource_card_twa_prev").click();
-  await page.locator("#resource_card_twa_next").click();
-  await page.locator("#resource_card_twa_next").click();
-  await page.locator("#resource_card_twa_next").click();
-  await page.locator("#resource_card_twa_next").click();
+  for (let i = 0; i < 5; i++) {
+    await page.locator("#resource_card_twa_prev").click();
+  }
+  for (let i = 0; i < 5; i++) {
+    await page.locator("#resource_card_twa_next").click();
+  }
 });
 /*
 test("Slider test one", async ({ page }) => {
