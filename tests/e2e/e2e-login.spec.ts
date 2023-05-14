@@ -23,4 +23,9 @@ test.describe.parallel("Login / Logout Flow", () => {
 
     await loginPage.logout();
   });
+
+  test("Trying to login with wrong username and password", async ({ page }) => {
+    await loginPage.wrongLogin();
+    await loginPage.assertErrorMessage();
+  });
 });
