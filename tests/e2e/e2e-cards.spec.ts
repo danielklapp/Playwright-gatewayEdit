@@ -65,4 +65,22 @@ test.describe.parallel("Scripture Pane Card", () => {
     await homePage.restore("#restore_title_resource_card_ta div");
     await homePage.restore("#restore_title_resource_card_tq div");
   });
+
+  test.only("Checking previous and next buttons for translationNotes", async ({
+    page,
+  }) => {
+    await loginPage.login();
+    await accountSettingsPage.translationSettings();
+    await homePage.prev("#resource_card_tn_prev");
+    await homePage.next("#resource_card_tn_next");
+  });
+
+  test("Checking previous and next buttons for translationWord Articles", async ({
+    page,
+  }) => {
+    await loginPage.login();
+    await accountSettingsPage.translationSettings();
+    await homePage.prev("#resource_card_twa_prev");
+    await homePage.next("#resource_card_twa_next");
+  });
 });

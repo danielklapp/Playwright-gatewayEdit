@@ -42,4 +42,20 @@ export class HomePage {
     await recentCards.click();
     await button.click();
   }
+
+  async prev(cardLocator: string) {
+    const button = this.page.locator(cardLocator);
+
+    for (let i = 0; i < 5; i++) {
+      await button.click();
+    }
+  }
+
+  async next(cardLocator: string) {
+    const button = this.page.locator(cardLocator);
+
+    for (let i = 0; i < 5; i++) {
+      await button.click();
+    }
+  }
 }
