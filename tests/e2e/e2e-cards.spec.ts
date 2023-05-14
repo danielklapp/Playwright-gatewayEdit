@@ -66,7 +66,7 @@ test.describe.parallel("Scripture Pane Card", () => {
     await homePage.restore("#restore_title_resource_card_tq div");
   });
 
-  test.only("Checking previous and next buttons for translationNotes", async ({
+  test("Checking previous and next buttons for translationNotes", async ({
     page,
   }) => {
     await loginPage.login();
