@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test.describe.parallel("All my assertion tests together", () => {
   test.beforeEach(async ({ page }) => {
-    // await page.goto(`${process.env.BASE_URL}`);
+    // await page.goto(`${process.env.BASE_URL}?server=QA`);
     await page.goto(
       "https://release-v2-0-0--gateway-edit.netlify.app/?server=QA"
     );
