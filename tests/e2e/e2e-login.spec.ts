@@ -20,7 +20,6 @@ test.describe.parallel("Login / Logout Flow", () => {
   test("Logout for gatewayEdit", async ({ page }) => {
     // Must login before logout - due to test isolation
     await loginPage.login();
-
     await loginPage.logout();
   });
 
