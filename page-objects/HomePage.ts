@@ -10,7 +10,7 @@ export class HomePage {
   }
 
   async visit() {
-    //   await this.page.goto(`${process.env.BASE_URL}`);
+    // await this.page.goto(`${process.env.BASE_URL}?server=QA`);
 
     await this.page.goto(
       `https://release-v2-0-0--gateway-edit.netlify.app/?server=qa`
