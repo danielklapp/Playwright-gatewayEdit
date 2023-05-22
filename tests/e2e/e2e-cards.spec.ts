@@ -71,6 +71,7 @@ test.describe.parallel("Scripture Pane Card", () => {
   }) => {
     await loginPage.login();
     await accountSettingsPage.translationSettings();
+
     await Promise.all([
       homePage.prev("#resource_card_tn_prev"),
       homePage.next("#resource_card_tn_next"),
@@ -83,6 +84,7 @@ test.describe.parallel("Scripture Pane Card", () => {
   }) => {
     await loginPage.login();
     await accountSettingsPage.translationSettings();
+
     await Promise.all([
       homePage.prev("#resource_card_twa_prev"),
       homePage.next("#resource_card_twa_next"),
