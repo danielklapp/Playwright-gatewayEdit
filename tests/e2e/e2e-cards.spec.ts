@@ -71,8 +71,11 @@ test.describe.parallel("Scripture Pane Card", () => {
   }) => {
     await loginPage.login();
     await accountSettingsPage.translationSettings();
-    await homePage.prev("#resource_card_tn_prev");
-    await homePage.next("#resource_card_tn_next");
+    await Promise.all([
+      homePage.prev("#resource_card_tn_prev"),
+      homePage.next("#resource_card_tn_next"),
+    ]);
+    await page.waitForLoadState();
   });
 
   test("Checking previous and next buttons for translationWord Articles", async ({
@@ -80,7 +83,10 @@ test.describe.parallel("Scripture Pane Card", () => {
   }) => {
     await loginPage.login();
     await accountSettingsPage.translationSettings();
-    await homePage.prev("#resource_card_twa_prev");
-    await homePage.next("#resource_card_twa_next");
+    await Promise.all([
+      homePage.prev("#resource_card_twa_prev"),
+      homePage.next("#resource_card_twa_next"),
+    ]);
+    await page.waitForLoadState();
   });
 });
