@@ -1,9 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test.fixme("Align button for Scripture cards", async ({ page }) => {
-  await page.goto(
-    "https://release-v2-0-0--gateway-edit.netlify.app/?server=QA"
-  );
+  await page.goto(`${process.env.BASE_URL}?server=QA`);
   await page
     .locator('[data-test="username-input"]')
     .getByRole("textbox")
