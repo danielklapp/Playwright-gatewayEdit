@@ -33,7 +33,7 @@ test.describe.parallel("Login / Logout Flow", () => {
     await loginPage.logout();
   });
 
-  test.only("Checking to make sure you have logged Out", async ({ page }) => {
+  test("Checking to make sure you have logged Out", async ({ page }) => {
     await loginPage.login();
     await accountSettingsPage.translationSettings();
     await loginPage.logout();
