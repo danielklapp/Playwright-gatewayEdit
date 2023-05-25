@@ -6,7 +6,6 @@ export class LoginPage {
   readonly passwordInput: Locator;
   readonly keepmeloggedinBox: Locator;
   readonly submitButton: Locator;
-  readonly organizationButton: Locator;
   readonly menuIconButton: Locator;
   readonly signOutButton: Locator;
   readonly errorMessage: Locator;
@@ -22,7 +21,6 @@ export class LoginPage {
       .getByRole("textbox");
     this.keepmeloggedinBox = page.getByLabel("Keep me logged in");
     this.submitButton = page.locator('[data-test="submit-button"]');
-    this.organizationButton = page.locator("#organization-select-outlined");
     this.menuIconButton = page.getByRole("button", { name: "menu" });
     this.signOutButton = page.getByRole("button", { name: "Logout" });
     this.errorMessage = page.locator("P[data-test$='login-error-text']");
@@ -33,6 +31,7 @@ export class LoginPage {
     await this.usernameInput.fill(`${process.env.USERNAME}`);
     await this.passwordInput.fill(`${process.env.PASSWORD}`);
     await this.keepmeloggedinBox.check();
+    expect(this.keepmeloggedinBox).toBeChecked();
     await this.submitButton.click();
   }
 
@@ -46,6 +45,16 @@ export class LoginPage {
   async logout() {
     await this.menuIconButton.click();
     await this.signOutButton.click();
+  }
+
+  async reallyLoggedout() {
+    await this.menuIconButton.click();
+    expect(this.signOutButton).not.toBeVisible();
+  }
+
+  async reallyLoggedin() {
+    await this.menuIconButton.click();
+    expect(this.signOutButton).toBeVisible();
   }
 
   async snapshotLoginForm() {
