@@ -8,6 +8,8 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      ENVIRONMENT_VARIABLE: test
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -25,3 +27,6 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+      - name: Accessing github variable
+        run: |
+          echo "Github Ref: $GITHUB_REF"
