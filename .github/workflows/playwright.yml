@@ -11,6 +11,9 @@ jobs:
     env:
       ENVIRONMENT_VARIABLE: Test
     steps:
+      - name: Accessing github variable
+        run: |
+          echo "Github Ref: $GITHUB_REF"
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
@@ -27,6 +30,3 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-      - name: Accessing github variable
-        run: |
-          echo "Github Ref: $GITHUB_REF"
