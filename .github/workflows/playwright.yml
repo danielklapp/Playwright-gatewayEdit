@@ -8,10 +8,12 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      ENVIRONMENT_VARIABLE: Test
     steps:
       - name: Accessing github variable
         run: |
-          echo $GITHUB_WORKSPACE(BASE_URL)"
+          echo "Github Ref: $GITHUB_(TEST)"
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
