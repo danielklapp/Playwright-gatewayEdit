@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Accessing github variable
         run: |
-          echo "Github Ref: $GITHUB_(TEST)"
+          echo "Github Ref: $GITHUB_(Test)"
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
