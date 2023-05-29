@@ -1,4 +1,7 @@
 name: Playwright Tests
+env:
+  CHILD_CONCURRENCY: 1
+  NODE_ENV: test
 on:
   push:
     branches: [main, master]
