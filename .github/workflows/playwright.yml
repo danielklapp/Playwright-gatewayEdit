@@ -1,8 +1,11 @@
 name: Playwright Tests
 env:
-  CHILD_CONCURRENCY: 1
   NODE_ENV: test
   BASE_URL: https://release-v2-0-0--gateway-edit.netlify.app/
+  USERNAME: ${{ secrets.USERNAME }}
+  PASSWORD: ${{ secrets.PASSWORD }}
+  USERNAME2: ${{ secrets.USERNAME2 }}
+  PASSWORD2: ${{ secrets.PASSWORD2 }}
 on:
   push:
     branches: [main, master]
