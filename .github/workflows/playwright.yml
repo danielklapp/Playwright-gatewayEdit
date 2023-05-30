@@ -15,16 +15,11 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    env:
-      ENVIRONMENT_VARIABLE: Test
     steps:
-      - name: Accessing github variable
-        run: |
-          echo "Github Ref: $GITHUB_(Test)"
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
