@@ -67,23 +67,22 @@ test.describe.parallel("All my assertion tests together", () => {
     await expect(previewTitle_tq).toHaveAttribute("title", "Preview");
   });
 
-  test.fixme(
-    "Save button is disabled when there's no edit to card",
-    async ({ page }) => {
-      const saveButton_0 = page.locator("#save_button_scripture_card_0");
-      await expect(saveButton_0).toBeDisabled();
-      const saveButton_2 = page.locator("#save_button_scripture_card_2");
-      await expect(saveButton_2).toBeDisabled();
-      const saveButton_tn = page.locator("#save_button_resource_card_tn");
-      await expect(saveButton_tn).toBeDisabled();
-      const saveButton_ta = page.locator("#save_button_resource_card_ta");
-      await expect(saveButton_ta).toBeDisabled();
-      const saveButton_twl = page.locator("#save_button_resource_card_twl");
-      await expect(saveButton_twl).toBeDisabled();
-      const saveButton_twa = page.locator("#save_button_resource_card_twa");
-      await expect(saveButton_twa).toBeDisabled();
-      const saveButton_tq = page.locator("#save_button_resource_card_tq");
-      await expect(saveButton_tq).toBeDisabled();
-    }
-  );
+  test("Save button is disabled when there's no edit to card", async ({
+    page,
+  }) => {
+    const saveButton_0 = page.locator("#save_button_scripture_card_0");
+    await expect(saveButton_0).toBeDisabled();
+    const saveButton_2 = page.locator("#save_button_scripture_card_2");
+    await expect(saveButton_2).toBeDisabled();
+    const saveButton_tn = page.locator("#save_button_resource_card_tn");
+    await expect(saveButton_tn).toBeDisabled();
+    const saveButton_ta = page.locator("#save_button_resource_card_ta");
+    await expect(saveButton_ta).toBeDisabled();
+    const saveButton_twl = page.locator("#save_button_resource_card_twl");
+    await expect(saveButton_twl).toBeDisabled();
+    const saveButton_twa = page.locator("#save_button_resource_card_twa");
+    await expect(saveButton_twa).toBeDisabled();
+    const saveButton_tq = page.locator("#save_button_resource_card_tq");
+    await expect(saveButton_tq).toBeDisabled();
+  });
 });
