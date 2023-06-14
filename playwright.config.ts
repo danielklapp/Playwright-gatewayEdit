@@ -1,7 +1,6 @@
 import { PlaywrightTestConfig } from "@playwright/test";
 import * as dotenv from "dotenv";
 const { devices } = require("@playwright/test");
-import { defineConfig } from "@playwright/test";
 
 dotenv.config({
   path: "./.env",
@@ -42,9 +41,4 @@ const config: PlaywrightTestConfig = {
   ],
 };
 
-// export default config;
-export default defineConfig({
-  expect: {
-    toHaveScreenshot: { maxDiffPixels: 100 },
-  },
-});
+export default config;
