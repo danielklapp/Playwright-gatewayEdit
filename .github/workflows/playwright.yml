@@ -14,7 +14,7 @@ on:
 jobs:
   test:
     timeout-minutes: 60
-    runs-on: macos-latest # or ubuntu-latest
+    runs-on: ubuntu-latest # or macos-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -27,7 +27,7 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test
       - uses: actions/upload-artifact@v3
-        if: always()
+        if: failure()
         with:
           name: playwright-report
           path: playwright-report/
