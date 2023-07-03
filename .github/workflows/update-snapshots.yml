@@ -6,13 +6,11 @@ env:
   PASSWORD: ${{ secrets.PASSWORD }}
   USERNAME2: ${{ secrets.USERNAME2 }}
   PASSWORD2: ${{ secrets.PASSWORD2 }}
-on:
-  issue_comment:
-    types: [created]
+on: workflow_dispatch
 
 jobs:
   updatesnapshots:
-    if: ${{ github.event.issue.pull_request && github.event.comment.body == '/update-snapshots'}}
+    if: ${{ github.event.workflow == '/update-snapshots'}}
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -26,7 +24,7 @@ jobs:
           sha_and_branch=$(\
             curl \
               -H 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-              https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.issue.number }} \
+              https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.workflow.number }} \
             | jq -r '.head.sha," ",.head.ref');
           echo "::set-output name=sha::$(echo $sha_and_branch | cut -d " " -f 1)";
           echo "::set-output name=branch::$(echo $sha_and_branch | cut -d " " -f 2)"
