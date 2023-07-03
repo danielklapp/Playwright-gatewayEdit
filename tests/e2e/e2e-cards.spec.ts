@@ -27,6 +27,7 @@ test.describe.parallel("Scripture Pane Card", () => {
     await homePage.minimize("#resource_card_tn");
     await homePage.minimize("#resource_card_ta");
     await homePage.minimize("#resource_card_tq");
+    await homePage.verifyRecentCards();
     await homePage.restore(
       "#restore_button_scripture_card_Literal_Translation"
     );
@@ -52,6 +53,7 @@ test.describe.parallel("Scripture Pane Card", () => {
     await homePage.minimize("#resource_card_tn");
     await homePage.minimize("#resource_card_ta");
     await homePage.minimize("#resource_card_tq");
+    await homePage.verifyRecentCards();
     await homePage.restore(
       "#restore_title_scripture_card_Literal_Translation div"
     );
@@ -64,6 +66,24 @@ test.describe.parallel("Scripture Pane Card", () => {
     await homePage.restore("#restore_title_resource_card_tn div");
     await homePage.restore("#restore_title_resource_card_ta div");
     await homePage.restore("#restore_title_resource_card_tq div");
+  });
+
+  test("Verifying markdown button has title Markdown", async ({ page }) => {
+    await loginPage.login();
+    await accountSettingsPage.translationSettings();
+    await homePage.verifyMarkdown("#markdown_button_resource_card_tn");
+    await homePage.verifyMarkdown("#markdown_button_resource_card_ta");
+    await homePage.verifyMarkdown("#markdown_button_resource_card_twa");
+    await homePage.verifyMarkdown("#markdown_button_resource_card_tq");
+  });
+
+  test("Verifying preview button has title Preview", async ({ page }) => {
+    await loginPage.login();
+    await accountSettingsPage.translationSettings();
+    await homePage.verifyPreview("#markdown_button_resource_card_tn");
+    await homePage.verifyPreview("#markdown_button_resource_card_ta");
+    await homePage.verifyPreview("#markdown_button_resource_card_twa");
+    await homePage.verifyPreview("#markdown_button_resource_card_tq");
   });
 
   test("Checking previous and next buttons for translationNotes", async ({

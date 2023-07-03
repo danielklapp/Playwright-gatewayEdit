@@ -23,7 +23,7 @@ test.describe.parallel("Login / Logout Flow", () => {
   test("Checking to make sure you have logged in", async ({ page }) => {
     await loginPage.login();
     await accountSettingsPage.translationSettings();
-    await loginPage.ensureLoggedin();
+    await loginPage.verifyLoggedin();
   });
 
   test("Logout for gatewayEdit", async ({ page }) => {
@@ -37,7 +37,7 @@ test.describe.parallel("Login / Logout Flow", () => {
     await loginPage.login();
     await accountSettingsPage.translationSettings();
     await loginPage.logout();
-    await loginPage.ensureLoggedout();
+    await loginPage.verifyLoggedout();
   });
 
   test("Trying to login with wrong username and password", async ({ page }) => {
