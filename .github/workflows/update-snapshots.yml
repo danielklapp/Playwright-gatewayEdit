@@ -8,7 +8,7 @@ env:
   PASSWORD2: ${{ secrets.PASSWORD2 }}
 on:
   issue_comment:
-    types: [created]
+    types: [created, edited]
 
 jobs:
   updatesnapshots:
