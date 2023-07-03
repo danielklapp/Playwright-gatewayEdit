@@ -47,12 +47,12 @@ export class LoginPage {
     await this.signOutButton.click();
   }
 
-  async ensureLoggedout() {
+  async verifyLoggedout() {
     await this.menuIconButton.click();
     expect(this.signOutButton).not.toBeVisible();
   }
 
-  async ensureLoggedin() {
+  async verifyLoggedin() {
     await this.menuIconButton.click();
     expect(this.signOutButton).toBeVisible();
   }
