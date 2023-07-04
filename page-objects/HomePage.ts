@@ -70,11 +70,8 @@ export class HomePage {
     });
     const button = this.page.locator(cardLocator);
 
-    if (markdownButton == markdownButton) {
-      expect(markdownButton.getByTitle("Markdown"));
-      await button.click();
-      expect(markdownButton.getByTitle("Preview"));
-    } else markdownButton != markdownButton;
+    expect(markdownButton.getByTitle("Markdown"));
+    await button.click();
     expect(markdownButton.getByTitle("Preview"));
   }
 
@@ -85,11 +82,8 @@ export class HomePage {
     });
     const button = this.page.locator(cardLocator);
 
-    if (previewButton == previewButton) {
-      expect(previewButton.getByTitle("Preview"));
-      await button.click();
-      expect(previewButton.getByTitle("Markdown"));
-    } else previewButton != previewButton;
+    expect(previewButton.getByTitle("Preview"));
+    await button.click();
     expect(previewButton.getByTitle("Markdown"));
   }
 }
