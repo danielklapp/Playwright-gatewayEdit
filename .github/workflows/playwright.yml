@@ -57,7 +57,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: regression-visual-snapshots
-          path: visual
+          path: tests/visual
       - name: Output contents
         run: ls
       - name: Output filename
