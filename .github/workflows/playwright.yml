@@ -44,7 +44,6 @@ jobs:
         id: publish
         run: find visual/visual.spec.ts-snapshots/*.ts -type f -execdir echo 'visual-snapshots={}' >> $GITHUB_OUTPUT ';'
       - uses: actions/upload-artifact@v3
-        if: failure()
         with:
           name: playwright-report
           path: playwright-report/
