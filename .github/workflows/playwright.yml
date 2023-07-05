@@ -42,7 +42,7 @@ jobs:
         run: npx playwright test
       - name: Publish TS filename
         id: publish
-        run: find visual/visual.spec.ts-snapshots/*.ts -type f -execdir echo 'visual-snapshots={}' >> $GITHUB_OUTPUT ';'
+        run: find tests/visual/ -type f -execdir echo 'visual-snapshots={}' >> $GITHUB_OUTPUT ';'
       - uses: actions/upload-artifact@v3
         if: failure()
         with:
