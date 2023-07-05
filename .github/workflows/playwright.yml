@@ -8,9 +8,9 @@ env:
   PASSWORD2: ${{ secrets.PASSWORD2 }}
 on:
   push:
-    branches: [main, master]
+    branches: [main, master, Previous Workflow]
   pull_request:
-    branches: [main, master]
+    branches: [main, master, Previous Workflow]
 jobs:
   test:
     timeout-minutes: 60
@@ -44,20 +44,33 @@ jobs:
         id: publish
         run: find visual/visual.spec.ts-snapshots/*.ts -type f -execdir echo 'visual-snapshots={}' >> $GITHUB_OUTPUT ';'
       - uses: actions/upload-artifact@v3
+        if: failure()
         with:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+  # artifacts:
+  #   needs: test
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Get test artifacts
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: regression-visual-snapshots
+  #         path: visual
+  #     - name: Output contents
+  #       run: ls
+  #     - name: Output filename
+  #       run: echo "${{ needs.test.outputs.visual-snapshots}}"
+
   artifacts:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - name: Get test artifacts
-        uses: actions/download-artifact@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Download Artifacts from Previous Workflow
+        uses: synergy-au/download-workflow-artifacts-action@v1
         with:
-          name: regression-visual-snapshots
-          path: visual
-      - name: Output contents
-        run: ls
-      - name: Output filename
-        run: echo "${{ needs.test.outputs.visual-snapshots}}"
+          auth-token: ${{ secrets.GITHUB_TOKEN }}
+          workflow-run-id: ${{ github.event.workflow_run.id }}
