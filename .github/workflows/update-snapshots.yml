@@ -10,7 +10,6 @@ env:
 on: workflow_dispatch
 
 jobs:
-  needs: test
   updatesnapshots:
     if: ${{ github.event.workflow == '/update-snapshots'}}
     timeout-minutes: 60
