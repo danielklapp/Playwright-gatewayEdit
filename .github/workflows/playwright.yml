@@ -56,9 +56,9 @@ jobs:
         if: failure() && steps.update-snapshot.outcome == 'failure'
         with:
           name: visual-snapshot
-          path: visual-snapshot/
+          path: tests/visual/
           retention-days: 30
-  artifacts:
+  visual-snapshots:
     needs: test
     runs-on: ubuntu-latest
     steps:
@@ -66,7 +66,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: visual-snapshot
-          path: visual-snapshot
+          path: tests/visual/
       - name: Output contents
         run: ls
       - name: Output filename
