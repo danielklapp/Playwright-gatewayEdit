@@ -56,7 +56,7 @@ jobs:
       - name: Get test artifacts
         uses: actions/download-artifact@v3
         with:
-          name: regression-visual-snapshots
+          name: visual-snapshots
           path: tests/visual
       - name: Output contents
         run: ls
