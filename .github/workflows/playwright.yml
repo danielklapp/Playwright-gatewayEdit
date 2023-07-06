@@ -49,6 +49,15 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+      - name: Regression visual snapshots
+        id: update-snapshot
+        run: find tests/visual/ -type f -execdir echo 'visual-snapshots={}' >> $GITHUB_OUTPUT ';'
+      - uses: actions/upload-artifact@v3
+        if: failure() && steps.update-snapshot.outcome == 'failure'
+        with:
+          name: visual-snapshot
+          path: visual-snapshot/
+          retention-days: 30
   artifacts:
     needs: test
     runs-on: ubuntu-latest
@@ -56,8 +65,8 @@ jobs:
       - name: Get test artifacts
         uses: actions/download-artifact@v3
         with:
-          name: visual-snapshots
-          path: tests/visual
+          name: visual-snapshot
+          path: visual-snapshot
       - name: Output contents
         run: ls
       - name: Output filename
