@@ -50,8 +50,8 @@ export class HomePage {
 
     for (let i = 0; i < 5; i++) {
       await button.click();
+      expect(button).toBeEnabled();
     }
-    expect(button).toBeEnabled();
   }
 
   async next(cardLocator: string) {
@@ -59,8 +59,8 @@ export class HomePage {
 
     for (let i = 0; i < 5; i++) {
       await button.click();
+      expect(button).toBeEnabled();
     }
-    expect(button).toBeEnabled();
   }
 
   async verifyMarkdown(cardLocator: string) {
