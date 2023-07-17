@@ -74,6 +74,6 @@ jobs:
         run: ls
       - name: Publish visual-snapshots
         id: publish
-        run: find tests/visual/ubuntu-visual.spec.ts-snapshots/* -type f -execdir echo 'visual-snapshots={}' >> $GITHUB_OUTPUT ';'
+        run: find tests/visual/* -type f -execdir echo 'visual-snapshots={}' >> $GITHUB_OUTPUT ';'
       - name: Output filename
         run: echo "${{ needs.test.outputs.visual-snapshots}}"
