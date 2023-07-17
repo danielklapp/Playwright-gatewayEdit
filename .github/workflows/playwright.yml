@@ -64,7 +64,7 @@ jobs:
     steps:
       - name: Get test artifacts
         uses: actions/download-artifact@v3
-        if: failure()
+        if: always()
         with:
           name: visual-snapshot
           path: tests/visual/ubuntu-visual.spec.ts-snapshots/
