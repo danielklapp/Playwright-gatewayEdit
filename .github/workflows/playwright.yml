@@ -61,14 +61,19 @@ jobs:
   visual-snapshots:
     needs: test
     runs-on: ubuntu-latest
+    outputs:
+      visual-snapshots: ${{ steps.publish.outputs.visual-snapshots }}
     steps:
       - name: Get test artifacts
         uses: actions/download-artifact@v3
-        if: always()
+        if: failure()
         with:
           name: visual-snapshot
           path: tests/visual/ubuntu-visual.spec.ts-snapshots/
       - name: Output contents
         run: ls
+      - name: Publish visual-snapshots
+        id: publish
+        run: find tests/visual/ubuntu-visual.spec.ts-snapshots/* -type f -execdir echo 'visual-snapshots={}' >> $GITHUB_OUTPUT ';'
       - name: Output filename
         run: echo "${{ needs.test.outputs.visual-snapshots}}"
