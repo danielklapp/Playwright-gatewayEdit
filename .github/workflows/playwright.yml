@@ -44,7 +44,7 @@ jobs:
         with:
           path: |
             ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/package-lock.json') }}
       - run: npm ci
       - run: npx playwright install --with-deps
         if: steps.playwright-cache.outputs.cache-hit != 'true'
@@ -71,12 +71,10 @@ jobs:
           name: visual-snapshot
           path: tests/visual/ubuntu-visual.spec.ts-snapshots/
           retention-days: 30
-  visual-snapshots:
-    needs: test
-    runs-on: ubuntu-latest
-    outputs:
-      visual-snapshots: ${{ steps.publish.outputs.visual-snapshots }}
-    steps:
+      #  visual-snapshots:
+      #    needs: test
+      #    runs-on: ubuntu-latest
+      #   steps:
       - name: Get test artifacts
         uses: actions/download-artifact@v3
         if: failure()
@@ -85,8 +83,5 @@ jobs:
           path: tests/visual/ubuntu-visual.spec.ts-snapshots/
       - name: Output contents
         run: ls
-      - name: Publish visual-snapshots
-        id: publish
-        run: find tests/visual/ubuntu-visual.spec.ts-snapshots/ -type f -execdir echo 'visual-snapshots={}' >> $GITHUB_OUTPUT ';'
-      - name: Output filename
-        run: echo "${{ needs.test.outputs.visual-snapshots}}"
+      # - name: Output filename
+      #   run: echo "${{ needs.test.outputs.visual-snapshots}}"
