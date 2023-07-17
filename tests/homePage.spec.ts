@@ -1,7 +1,8 @@
 import { test, expect } from "@playwright/test";
 
-test.fixme("Align button for Scripture cards", async ({ page }) => {
+test("Align button for Scripture card", async ({ page }) => {
   await page.goto(`${process.env.BASE_URL}?server=QA`);
+  await expect(page).toHaveURL(`${process.env.BASE_URL}?server=QA`);
   await page
     .locator('[data-test="username-input"]')
     .getByRole("textbox")
@@ -25,11 +26,67 @@ test.fixme("Align button for Scripture cards", async ({ page }) => {
   await page.getByRole("button", { name: "​", exact: true }).click();
   await page.getByRole("option", { name: "en - English - English" }).click();
   await page.getByRole("button", { name: "Save and Continue" }).click();
-  await page.waitForSelector("#scripture_card_0");
+
+  await page
+    .locator("div[id='scripture_card_0'] div[class='sc-brSaZW kHSFvm']")
+    .click();
+  await page.waitForLoadState("networkidle");
+  await page
+    .getByText(
+      "The book of the genealogy of Jesus Christ, son of David, son of Abraham:"
+    )
+    .click();
+  // await page.pause();
+  await page
+    .locator("div[id='scripture_card_0'] span[class='sc-hABAzo cdHyFD']")
+    // .getByText(
+    //   "The book of the genealogy of Jesus Christ, son of David, son of Abraham:"
+    // )
+    .press("Meta+ArrowDown");
+  await page
+    .getByText(
+      "The book of the genealogy of Jesus Christ, son of David, son of Abraham:"
+    )
+    .fill(
+      "The book of the genealogy of Jesus Christ, son of David, son of Abraham:\ntest edit"
+    );
+  const invalidAlignment = page.locator(
+    "#invalid_alignment_icon_TARGET_LITERAL"
+  );
+  await expect(invalidAlignment).toBeEnabled();
+  ("#valid_icon_TARGET_LITERAL");
   await page.locator("#alignment_icon_TARGET_LITERAL").click();
-  page.waitForLoadState("networkidle");
-  await page.getByRole("button", { name: "Cancel" }).click();
-  await page.waitForSelector("#scripture_card_2");
-  await page.locator("#alignment_icon_TARGET_SIMPLIFIED").click();
-  await page.getByRole("button", { name: "Cancel" }).click();
+
+  await page.locator("#wordList").hover();
+  await page.mouse.wheel(0, 7000);
+
+  const test = page
+    .locator("div")
+    .filter({ hasText: /^test$/ })
+    .nth(3);
+  const βίβλος = page
+    .getByRole("dialog", {
+      name: "Aligning: MAT 1:1 in unfoldingWord® Literal Text v47",
+    })
+    .getByText("βίβλος");
+
+  await test.dragTo(βίβλος);
+
+  const edit = page
+    .locator("div")
+    .filter({ hasText: /^edit$/ })
+    .nth(3);
+  const γενέσεως = page
+    .getByRole("dialog", {
+      name: "Aligning: MAT 1:1 in unfoldingWord® Literal Text v47",
+    })
+    .getByText("γενέσεως");
+
+  await edit.dragTo(γενέσεως);
+
+  await page.waitForTimeout(1000);
+
+  await page.getByRole("button", { name: "Accept" }).click();
+  const validAlignment = page.locator("#valid_icon_TARGET_LITERAL");
+  await expect(validAlignment).toBeEnabled();
 });
