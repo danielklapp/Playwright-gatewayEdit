@@ -48,23 +48,6 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit != 'true'
       - run: npx playwright install-deps
         if: steps.playwright-cache.outputs.cache-hit == 'true'
-      # - name: Get installed Playwright version
-      #   id: playwright-version
-      #   run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package-lock.json').dependencies['@playwright/test'].version)")" >> $GITHUB_ENV
-      # - name: Cache playwright binaries
-      #   uses: actions/cache@v3
-      #   id: playwright-cache
-      #   with:
-      #     path: |
-      #       ~/.cache/ms-playwright
-      #     key: ${{ runner.os }}-playwright-${{ hashFiles('**/package-lock.json') }}
-      # - run: npm ci
-      # - run: npx playwright install --with-deps
-      #   if: steps.playwright-cache.outputs.cache-hit != 'true'
-      # - run: npx playwright install-deps
-      #   if: steps.playwright-cache.outputs.cache-hit != 'true'
-      # - name: Install Playwright Browsers
-      # run: npx playwright install --with-deps
       - name: Run Playwright tests
         continue-on-error: true
         run: npx playwright test
@@ -86,7 +69,7 @@ jobs:
           name: visual-snapshot
           path: tests/visual/ubuntu-visual.spec.ts-snapshots/
           retention-days: 30
-  visual-snapshot-artifact:
+  visual-snapshot-artifacts:
     needs: test
     runs-on: ubuntu-latest
     steps:
@@ -100,7 +83,7 @@ jobs:
         run: ls
       - id: timestamp
         run: echo "::set-output name=timestamp::$(timestamp +%s)"
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: |
             run_result
@@ -109,12 +92,8 @@ jobs:
             ${{ github.run_id }}-${{ github.job }}-
               - id: run_result
               run: cat run_result 2>/dev/null || echo 'default'
-              - uses: actions/checkout@v2
+              - uses: actions/checkout@v3
               if: steps.run_result.outputs.run_result != 'success'
               - run: echo "::set-output name=run_result::success" > run_result
-      #  visual-snapshots:
-      #    needs: test
-      #    runs-on: ubuntu-latest
-      #   steps:
-      # - name: Output filename
-      #   run: echo "${{ needs.test.outputs.visual-snapshots}}"
+      - name: Output filename
+        run: echo "${{ needs.test.outputs.visual-snapshots}}"
