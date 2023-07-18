@@ -67,7 +67,7 @@ jobs:
       # run: npx playwright install --with-deps
       - name: Get test artifacts
         uses: actions/download-artifact@v3
-        if: failure()
+        if: always()
         with:
           name: visual-snapshot
           path: tests/visual/ubuntu-visual.spec.ts-snapshots/
@@ -89,7 +89,7 @@ jobs:
         id: update-snapshot
         run: find tests/visual/ -type f -execdir echo 'visual-snapshots={}' >> $GITHUB_OUTPUT ';'
       - uses: actions/upload-artifact@v3
-        if: always()
+        if: failure()
         with:
           name: visual-snapshot
           path: tests/visual/ubuntu-visual.spec.ts-snapshots/
