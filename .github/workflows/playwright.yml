@@ -65,14 +65,6 @@ jobs:
       #   if: steps.playwright-cache.outputs.cache-hit != 'true'
       # - name: Install Playwright Browsers
       # run: npx playwright install --with-deps
-      - name: Get test artifacts
-        uses: actions/download-artifact@v3
-        if: always()
-        with:
-          name: visual-snapshot
-          path: tests/visual/ubuntu-visual.spec.ts-snapshots/
-      - name: Output contents
-        run: ls
       - name: Run Playwright tests
         continue-on-error: true
         run: npx playwright test
@@ -94,6 +86,14 @@ jobs:
           name: visual-snapshot
           path: tests/visual/ubuntu-visual.spec.ts-snapshots/
           retention-days: 30
+      - name: Get test artifacts
+        uses: actions/download-artifact@v3
+        if: always()
+        with:
+          name: visual-snapshot
+          path: tests/visual/ubuntu-visual.spec.ts-snapshots/
+      - name: Output contents
+        run: ls
       #  visual-snapshots:
       #    needs: test
       #    runs-on: ubuntu-latest
