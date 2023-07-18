@@ -81,19 +81,17 @@ jobs:
           path: tests/visual/ubuntu-visual.spec.ts-snapshots/
       - name: Output contents
         run: ls
-      - id: timestamp
-        run: echo "::set-output name=timestamp::$(timestamp +%s)"
-      - uses: actions/cache@v3
+      - name: Run Playwright tests
+        continue-on-error: true
+        run: npx playwright test
+      - name: Publish TS filename
+        if: failure()
+        id: publish
+        run: find tests/visual/ -type f -execdir echo 'visual-snapshots={}' >> $GITHUB_OUTPUT ';'
+      - uses: actions/upload-artifact@v3
         with:
-          path: |
-            run_result
-          key: ${{ github.run_id }}-${{ github.job }}-${{ steps.timestamp.outputs.timestamp }}
-          restore-keys: |
-            ${{ github.run_id }}-${{ github.job }}-
-              - id: run_result
-              run: cat run_result 2>/dev/null || echo 'default'
-              - uses: actions/checkout@v3
-              if: steps.run_result.outputs.run_result != 'success'
-              - run: echo "::set-output name=run_result::success" > run_result
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
       - name: Output filename
         run: echo "${{ needs.test.outputs.visual-snapshots}}"
