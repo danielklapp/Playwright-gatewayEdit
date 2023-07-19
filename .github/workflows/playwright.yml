@@ -69,18 +69,3 @@ jobs:
           name: visual-snapshot
           path: tests/visual/ubuntu-visual.spec.ts-snapshots/
           retention-days: 30
-  visual-snapshot-artifacts:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get test artifacts
-        uses: actions/download-artifact@v3
-        if: failure()
-        with:
-          name: visual-snapshot
-          path: tests/visual/ubuntu-visual.spec.ts-snapshots/
-      - name: Output contents
-        run: ls
-        timeout-minutes: 60
-      - name: Output filename
-        run: echo "${{ needs.test.outputs.visual-snapshots}}"
