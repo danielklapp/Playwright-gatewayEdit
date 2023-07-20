@@ -82,5 +82,10 @@ jobs:
       - name: Output contents
         run: ls
         timeout-minutes: 60
+      - uses: actions/checkout@v2
+      - uses: bokuweb/reg-actions@v1
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          image-directory-path: "./images"
       - name: Output filename
         run: echo "${{ needs.test.outputs.visual-snapshots}}"
