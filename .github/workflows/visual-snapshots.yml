@@ -86,6 +86,6 @@ jobs:
       - uses: bokuweb/reg-actions@v1
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
-          image-directory-path: "./visual"
+          image-directory-path: "./images"
       - name: Output filename
         run: echo "${{ needs.test.outputs.visual-snapshots}}"
