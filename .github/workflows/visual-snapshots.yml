@@ -67,7 +67,7 @@ jobs:
         if: always()
         with:
           name: visual-snapshot
-          path: tests/visual/ubuntu-visual.spec.ts-snapshots/
+          path: tests/visual/
           retention-days: 30
   visual-snapshot-artifacts:
     needs: test
@@ -78,11 +78,11 @@ jobs:
         if: failure()
         with:
           name: visual-snapshot
-          path: tests/visual/ubuntu-visual.spec.ts-snapshots/
+          path: tests/visual/
       - name: Output contents
         run: ls
         timeout-minutes: 60
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: bokuweb/reg-actions@v1
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
