@@ -67,5 +67,5 @@ jobs:
         if: always()
         with:
           name: visual-snapshot
-          path: tests/visual/ubuntu-visual.spec.ts-snapshots/
+          path: tests/visual/
           retention-days: 30
