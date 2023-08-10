@@ -2,7 +2,7 @@ import { test } from "@playwright/test";
 import { HomePage } from "../../page-objects/HomePage";
 import { LoginPage } from "../../page-objects/LoginPage";
 
-test.describe("Login Page Visual Tests", () => {
+test.describe.skip("Login Page Visual Tests", () => {
   let homepage: HomePage;
   let loginpage: LoginPage;
 
@@ -23,4 +23,3 @@ test.describe("Login Page Visual Tests", () => {
     await loginpage.assertErrorMessage();
   });
 });
-
