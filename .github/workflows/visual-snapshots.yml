@@ -1,4 +1,5 @@
 name: Visual Snapshots from Tests
+
 env:
   NODE_ENV: test
   BASE_URL: https://release-v2-0-0--gateway-edit.netlify.app/
@@ -6,26 +7,31 @@ env:
   PASSWORD: ${{ secrets.PASSWORD }}
   USERNAME2: ${{ secrets.USERNAME2 }}
   PASSWORD2: ${{ secrets.PASSWORD2 }}
+
 on:
   push:
     branches: [main, master, Previous Workflow]
   pull_request:
     branches: [main, master, Previous Workflow]
+
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     outputs:
       visual-snapshots: ${{ steps.publish.outputs.visual-snapshots }}
+
     steps:
       - name: Get code
         uses: actions/checkout@v3
+
       - name: Cache dependencies
         id: cache
         uses: actions/cache@v3
         with:
           path: node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
@@ -33,6 +39,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: latest
+
       - name: Install dependencies
         run: npm ci
       - uses: actions/cache@v3
@@ -41,16 +48,20 @@ jobs:
           path: |
             ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('**/package-lock.json') }}
+
       - name: Install dependencies
         run: npm ci
+
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
         if: steps.playwright-cache.outputs.cache-hit != 'true'
       - run: npx playwright install-deps
         if: steps.playwright-cache.outputs.cache-hit == 'true'
+
       - name: Run Playwright tests
         continue-on-error: true
         run: npx playwright test
+
       - name: Publish TS filename
         if: failure()
         id: publish
@@ -60,6 +71,7 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+
       - name: Regression visual snapshots
         id: update-snapshot
         run: find tests/visual/ -type f -execdir echo 'visual-snapshots={}' >> $GITHUB_OUTPUT ';'
@@ -69,9 +81,11 @@ jobs:
           name: visual-snapshot
           path: tests/visual/
           retention-days: 30
+
   visual-snapshot-artifacts:
     needs: test
     runs-on: ubuntu-latest
+
     steps:
       - name: Get test artifacts
         uses: actions/download-artifact@v3
@@ -79,8 +93,10 @@ jobs:
         with:
           name: visual-snapshot
           path: tests/visual/
+
       - name: Output contents
         run: ls
         timeout-minutes: 60
+        
       - name: Output filename
         run: echo "${{ needs.test.outputs.visual-snapshots}}"
