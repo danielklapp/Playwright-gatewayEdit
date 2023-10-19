@@ -36,12 +36,8 @@ test("Align button for Scripture card", async ({ page }) => {
       "The book of the genealogy of Jesus Christ, son of David, son of Abraham:"
     )
     .click();
-  // await page.pause();
   await page
     .locator("div[id='scripture_card_0'] span[class='sc-hABAzo cdHyFD']")
-    // .getByText(
-    //   "The book of the genealogy of Jesus Christ, son of David, son of Abraham:"
-    // )
     .press("Meta+ArrowDown");
   await page
     .getByText(
@@ -58,17 +54,16 @@ test("Align button for Scripture card", async ({ page }) => {
   await page.locator("#alignment_icon_TARGET_LITERAL").click();
 
   await page.locator("#wordList").hover();
-  await page.mouse.wheel(0, 7000);
+  await page.mouse.wheel(0, 1000);
 
   const test = page
     .locator("div")
     .filter({ hasText: /^test$/ })
     .nth(3);
   const βίβλος = page
-    .getByRole("dialog", {
-      name: "Aligning: MAT 1:1 in unfoldingWord® Literal Text v47",
-    })
-    .getByText("βίβλος");
+    .locator("div")
+    .filter({ hasText: /^βίβλοςThebook$/ })
+    .nth(1);
 
   await test.dragTo(βίβλος);
 
@@ -77,10 +72,9 @@ test("Align button for Scripture card", async ({ page }) => {
     .filter({ hasText: /^edit$/ })
     .nth(3);
   const γενέσεως = page
-    .getByRole("dialog", {
-      name: "Aligning: MAT 1:1 in unfoldingWord® Literal Text v47",
-    })
-    .getByText("γενέσεως");
+    .locator("div")
+    .filter({ hasText: /^γενέσεωςof1thegenealogy$/ })
+    .nth(1);
 
   await edit.dragTo(γενέσεως);
 
