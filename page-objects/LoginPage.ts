@@ -35,6 +35,14 @@ export class LoginPage {
     await this.submitButton.click();
   }
 
+  async login2() {
+    await this.usernameInput.fill(`${process.env.USERNAME2}`);
+    await this.passwordInput.fill(`${process.env.PASSWORD2}`);
+    await this.keepmeloggedinBox.check();
+    expect(this.keepmeloggedinBox).toBeChecked();
+    await this.submitButton.click();
+  }
+
   async wrongLogin() {
     await this.usernameInput.fill(`${process.env.USERNAME}abc`);
     await this.passwordInput.fill(`${process.env.PASSWORD}123`);
@@ -43,12 +51,13 @@ export class LoginPage {
   }
 
   async logout() {
-    await this.menuIconButton.click();
+    // await this.menuIconButton.click();
     await this.signOutButton.click();
   }
 
   async verifyLoggedout() {
     await this.menuIconButton.click();
+
     expect(this.signOutButton).not.toBeVisible();
   }
 

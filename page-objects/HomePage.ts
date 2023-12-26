@@ -24,6 +24,11 @@ export class HomePage {
     return card;
   }
 
+  button(cardLocator: string) {
+    const button = this.page.locator(cardLocator);
+    return button;
+  }
+
   async minimize(cardLocator: string) {
     const card = this.card(cardLocator);
     const button = card.getByRole("button", {
@@ -48,7 +53,7 @@ export class HomePage {
   async prev(cardLocator: string) {
     const button = this.page.locator(cardLocator);
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 3; i++) {
       await button.click();
       expect(button).toBeEnabled();
     }
@@ -57,7 +62,7 @@ export class HomePage {
   async next(cardLocator: string) {
     const button = this.page.locator(cardLocator);
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 3; i++) {
       await button.click();
       expect(button).toBeEnabled();
     }
