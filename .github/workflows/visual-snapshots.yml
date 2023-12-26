@@ -2,7 +2,7 @@ name: Visual Snapshots from Tests
 
 env:
   NODE_ENV: test
-  BASE_URL: https://release-v2-0-0--gateway-edit.netlify.app/
+  BASE_URL: https://release-v2-2-0--gateway-edit.netlify.app/
   USERNAME: ${{ secrets.USERNAME }}
   PASSWORD: ${{ secrets.PASSWORD }}
   USERNAME2: ${{ secrets.USERNAME2 }}
@@ -97,6 +97,6 @@ jobs:
       - name: Output contents
         run: ls
         timeout-minutes: 60
-        
+
       - name: Output filename
         run: echo "${{ needs.test.outputs.visual-snapshots}}"

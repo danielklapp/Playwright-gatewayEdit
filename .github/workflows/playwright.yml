@@ -2,7 +2,7 @@ name: Playwright Tests
 
 env:
   NODE_ENV: test
-  BASE_URL: https://release-v2-0-0--gateway-edit.netlify.app/
+  BASE_URL: https://release-v2-2-0--gateway-edit.netlify.app/
   USERNAME: ${{ secrets.USERNAME }}
   PASSWORD: ${{ secrets.PASSWORD }}
   USERNAME2: ${{ secrets.USERNAME2 }}
