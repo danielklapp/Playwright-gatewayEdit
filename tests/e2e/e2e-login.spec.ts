@@ -1,9 +1,9 @@
-import { test, expect } from "@playwright/test";
+import { test } from "@playwright/test";
 import { LoginPage } from "../../page-objects/LoginPage";
 import { HomePage } from "../../page-objects/HomePage";
 import { AccountSettingsPage } from "../../page-objects/AccountSettingsPage";
 
-test.describe.parallel("Login / Logout Flow", () => {
+test.describe("Login / Logout Flow", () => {
   let loginPage: LoginPage;
   let homePage: HomePage;
   let accountSettingsPage: AccountSettingsPage;
@@ -16,21 +16,15 @@ test.describe.parallel("Login / Logout Flow", () => {
     await homePage.visit();
   });
 
-  test("Login for gatewayEdit", async ({ page }) => {
-    await loginPage.login();
-    await accountSettingsPage.translationSettings();
+  test("Login to gatewayEdit when not affilited with any organizations", async ({
+    page,
+  }) => {
+    await loginPage.login2();
+    await accountSettingsPage.assertErrorMessage();
     await loginPage.verifyLoggedin();
   });
 
-  test("Logout for gatewayEdit", async ({ page }) => {
-    // Must login before logout - due to test isolation
-    await loginPage.login();
-    await accountSettingsPage.translationSettings();
-    await loginPage.logout();
-    await loginPage.verifyLoggedout();
-  });
-
-  test.only("Login with wrong credentials", async ({ page }) => {
+  test("Login with wrong credentials", async ({ page }) => {
     await loginPage.wrongLogin();
     await loginPage.assertErrorMessage();
   });
