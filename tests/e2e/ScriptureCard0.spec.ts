@@ -52,13 +52,11 @@ test.describe("Scripture Card 0", () => {
     const invalidAlignment = page.locator(
       "#invalid_alignment_icon_TARGET_LITERAL"
     );
+    const wordList = page.locator("#wordList");
     await expect(invalidAlignment).toBeEnabled();
     ("#valid_icon_TARGET_LITERAL");
     await page.locator("#alignment_icon_TARGET_LITERAL").click();
-
-    await page.locator("#wordList").hover();
-    await page.mouse.wheel(0, 1000);
-
+    await wordList.scrollIntoViewIfNeeded();
     const test = page
       .locator("div")
       .filter({ hasText: /^test$/ })
@@ -81,14 +79,14 @@ test.describe("Scripture Card 0", () => {
 
     await edit.dragTo(γενέσεως);
 
-    await page.waitForTimeout(1000);
-
     await page.getByRole("button", { name: "Accept" }).click();
     const validAlignment = page.locator("#valid_icon_TARGET_LITERAL");
     await expect(validAlignment).toBeEnabled();
   });
 
-  test.skip("Correct title for Restore_title_scripture_card_0", async ({ page }) => {
+  test.skip("Correct title for Restore_title_scripture_card_0", async ({
+    page,
+  }) => {
     const scriptureCard0 = page.locator(
       "div[id='scripture_card_0'] div[class='sc-brSaZW kHSFvm']"
     );
@@ -137,5 +135,60 @@ test.describe("Scripture Card 0", () => {
     await page.locator("#minimize_button_scripture_card_0").click();
     await page.getByLabel("minimized cards").click();
     await page.locator("#restore_title_scripture_card_0 div").click();
+  });
+
+  test("Making font size smaller", async ({ page }) => {
+    await homePage.cardMenu("#scripture_card_0_card_menu");
+
+    const startingFontSize = page
+      .locator("span")
+      .filter({ hasText: "100" })
+      .nth(1);
+    let changedFontSize = page.locator("span").filter({ hasText: "0" }).nth(1);
+    const box = await startingFontSize.boundingBox();
+    const x = box!.x + box!.width / 2;
+    const y = box!.y + box!.height / 2;
+
+    await page.mouse.move(x, y);
+    await page.mouse.down();
+    await page.mouse.move(x - 195, y);
+    await page.mouse.up();
+    expect(changedFontSize).toContainText("50");
+    await page.locator("#settings_card_close").click();
+  });
+
+  test("Making font size bigger", async ({ page }) => {
+    await homePage.cardMenu("#scripture_card_0_card_menu");
+
+    const startingFontSize = page
+      .locator("span")
+      .filter({ hasText: "100" })
+      .nth(1);
+    let changedFontSize = page
+      .locator("span")
+      .filter({ hasText: "150" })
+      .nth(1);
+    const box = await startingFontSize.boundingBox();
+    const x = box!.x + box!.width / 2;
+    const y = box!.y + box!.height / 2;
+
+    await page.mouse.move(x, y);
+    await page.mouse.down();
+    await page.mouse.move(x + 195, y);
+    await page.mouse.up();
+    await expect(changedFontSize).toContainText("150");
+    await page.locator("#settings_card_close").click();
+  });
+
+  test("Buttons are visible", async ({ page }) => {
+    await expect(
+      page.locator("#minimize_button_scripture_card_0")
+    ).toBeVisible();
+    await expect(page.locator("#save_button_scripture_card_0")).toBeVisible();
+    await expect(page.locator("#alignment_icon_TARGET_LITERAL")).toBeVisible();
+    await expect(
+      page.locator("#scripture_card_0").getByLabel("Update my content")
+    ).toBeVisible();
+    await expect(page.locator("#scripture_card_0_card_menu")).toBeVisible();
   });
 });

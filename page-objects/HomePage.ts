@@ -55,7 +55,7 @@ export class HomePage {
 
     for (let i = 0; i < 3; i++) {
       await button.click();
-      expect(button).toBeEnabled();
+      await expect(button).toBeEnabled();
     }
   }
 
@@ -64,7 +64,7 @@ export class HomePage {
 
     for (let i = 0; i < 3; i++) {
       await button.click();
-      expect(button).toBeEnabled();
+      await expect(button).toBeEnabled();
     }
   }
 
@@ -90,5 +90,10 @@ export class HomePage {
     expect(previewButton.getByTitle("Preview"));
     await button.click();
     expect(previewButton.getByTitle("Markdown"));
+  }
+  async cardMenu(cardLocator: string) {
+    const button = this.page.locator(cardLocator);
+
+    await button.click();
   }
 }

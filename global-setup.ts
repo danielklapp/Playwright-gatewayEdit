@@ -17,8 +17,7 @@ setup("First login/logout for gatewayEdit", async ({ page }) => {
 
   await loginPage.login();
   await accountSettingsPage.translationSettings();
-  await page.locator("#markdown_button_resource_card_tn").click();
-  await page.getByTitle("Preview").click();
+  await page.waitForSelector("#__next");
   await loginPage.verifyLoggedin();
   await loginPage.logout();
   await loginPage.verifyLoggedout();
