@@ -33,6 +33,13 @@ const config: PlaywrightTestConfig = {
       name: "setup",
       testDir: "./",
       testMatch: "global-setup.ts",
+      teardown: "teardown",
+    },
+    {
+      name: "teardown",
+      testDir: "./",
+      testMatch: "global-teardown.ts",
+      use: { storageState: STORAGE_STATE_PATH },
     },
     {
       name: "Chromium",
