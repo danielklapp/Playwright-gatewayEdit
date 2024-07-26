@@ -96,4 +96,12 @@ export class HomePage {
 
     await button.click();
   }
+
+  async changeVerse(cardLocator: string) {
+    const card = this.card(cardLocator);
+    let verse = this.page.locator(`#combo-box-verse-option-${card}`);
+    const button = this.page.locator(`#combo-box-verse-option-${card}`);
+
+    await button.click();
+  }
 }

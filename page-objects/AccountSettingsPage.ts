@@ -4,9 +4,11 @@ export class AccountSettingsPage {
   readonly page: Page;
   readonly application: Locator;
   readonly organizationBox: Locator;
-  readonly organization: Locator;
   readonly primaryTranslationLanguageBox: Locator;
-  readonly language: Locator;
+  readonly unfoldingWordOrganization: Locator;
+  readonly idiomasPuentesOrganization: Locator;
+  readonly unfoldingWordLanguage: Locator;
+  readonly idiomasPuentesLanguage: Locator;
   readonly saveAndContinue: Locator;
   readonly errorMessage: Locator;
 
@@ -16,12 +18,20 @@ export class AccountSettingsPage {
       "Translation SettingsOrganizationOrganizationThe application can not continue. Th"
     );
     this.organizationBox = page.locator("#organization-select-outlined");
-    this.organization = page.getByRole("option", { name: "unfoldingWord" });
     this.primaryTranslationLanguageBox = page.locator(
       "#primary-language-select-outlined"
     );
-    this.language = page.getByRole("option", {
+    this.unfoldingWordOrganization = page.getByRole("option", {
+      name: "unfoldingWord",
+    });
+    this.idiomasPuentesOrganization = page.getByRole("option", {
+      name: "es-419_gl",
+    });
+    this.unfoldingWordLanguage = page.getByRole("option", {
       name: "en - English - English",
+    });
+    this.idiomasPuentesLanguage = page.getByRole("option", {
+      name: "es-419 - Latin American",
     });
     this.saveAndContinue = page.locator(
       ".MuiButton-startIcon.MuiButton-iconSizeLarge"
@@ -29,11 +39,19 @@ export class AccountSettingsPage {
     this.errorMessage = page.locator("#organization-select-message");
   }
 
-  async translationSettings() {
+  async unfoldingWordTranslationSettings() {
     await this.organizationBox.click();
-    await this.organization.click();
+    await this.unfoldingWordOrganization.click();
     await this.primaryTranslationLanguageBox.click();
-    await this.language.click();
+    await this.unfoldingWordLanguage.click();
+    await this.saveAndContinue.click();
+  }
+
+  async idiomasPuentesTranslationSettings() {
+    await this.organizationBox.click();
+    await this.idiomasPuentesOrganization.click();
+    await this.primaryTranslationLanguageBox.click();
+    await this.idiomasPuentesLanguage.click();
     await this.saveAndContinue.click();
   }
 
