@@ -74,7 +74,9 @@ test.describe("Scripture Card 2", () => {
       page.locator("#minimize_button_scripture_card_2")
     ).toBeVisible();
     await expect(page.locator("#save_button_scripture_card_2")).toBeVisible();
-    await expect(page.locator("#valid_icon_TARGET_SIMPLIFIED")).toBeVisible();
+    await expect(
+      page.locator("#alignment_icon_TARGET_SIMPLIFIED")
+    ).toBeVisible();
     await expect(
       page.locator("#scripture_card_2").getByLabel("Update my content")
     ).toBeVisible();
